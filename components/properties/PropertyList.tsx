@@ -19,6 +19,11 @@ interface PropertyListProps {
 
 type SortOption = 'newest' | 'price_asc' | 'price_desc' | 'area_desc'
 
+// Helper function to check if listing is for sale (handles both 'sale' and legacy 'buy')
+const isForSale = (listingType: string | null): boolean => {
+  return listingType === 'sale' || listingType === 'buy'
+}
+
 export function PropertyList({ initialProperties }: PropertyListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('newest')
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
@@ -40,7 +45,7 @@ export function PropertyList({ initialProperties }: PropertyListProps) {
 
     if (propertyFilters.minPrice !== undefined || propertyFilters.maxPrice !== undefined) {
       filtered = filtered.filter((p) => {
-        const price = p.listing_type === 'rent' ? p.price_monthly : p.price_total
+        const price = isForSale(p.listing_type) ? p.price_total : p.price_monthly
         if (!price) return false
 
         const minOk = propertyFilters.minPrice === undefined || price >= propertyFilters.minPrice
@@ -68,14 +73,14 @@ export function PropertyList({ initialProperties }: PropertyListProps) {
           return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime()
 
         case 'price_asc': {
-          const priceA = a.listing_type === 'rent' ? a.price_monthly : a.price_total
-          const priceB = b.listing_type === 'rent' ? b.price_monthly : b.price_total
+          const priceA = isForSale(a.listing_type) ? a.price_total : a.price_monthly
+          const priceB = isForSale(b.listing_type) ? b.price_total : b.price_monthly
           return (priceA || 0) - (priceB || 0)
         }
 
         case 'price_desc': {
-          const priceA = a.listing_type === 'rent' ? a.price_monthly : a.price_total
-          const priceB = b.listing_type === 'rent' ? b.price_monthly : b.price_total
+          const priceA = isForSale(a.listing_type) ? a.price_total : a.price_monthly
+          const priceB = isForSale(b.listing_type) ? b.price_total : b.price_monthly
           return (priceB || 0) - (priceA || 0)
         }
 

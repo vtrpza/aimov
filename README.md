@@ -210,15 +210,31 @@ O projeto pode ser deployado em qualquer plataforma que suporte Next.js 16:
 - Limpe os cookies do navegador
 - Reinicie o servidor de desenvolvimento
 
-## 📝 Dados de Exemplo
+## 📝 Sistema de Dados
 
-O banco de dados inclui 6 propriedades de exemplo representando o mercado brasileiro:
-- Apartamento no Jardins, SP
-- Casa em Alphaville, SP
-- Cobertura na Barra da Tijuca, RJ
-- Kitnet no Centro de SP
-- Terreno comercial na Paulista, SP
-- Chácara em Atibaia, SP
+O sistema inclui:
+- **Scraping de propriedades** de fontes externas (VivaReal, etc.)
+- **Enriquecimento automático com IA** usando OpenAI GPT-4o-mini
+- **Validação de qualidade** de dados integrada
+- **Foco em dados estruturados** - Sem necessidade de imagens
+
+### Enriquecimento de Propriedades
+
+O sistema extrai automaticamente:
+- Tipo de propriedade (apartamento, casa, sobrado, etc.)
+- Quartos, banheiros, vagas
+- Bairro e localização
+- Features/amenidades (piscina, academia, etc.)
+- Resumos em português gerados por IA
+
+**Para enriquecer seus dados:**
+```bash
+pnpm validate    # Verificar qualidade atual
+pnpm enrich:test # Testar em 3 propriedades
+pnpm enrich      # Enriquecer todas
+```
+
+Veja `ENRICHMENT_GUIDE.md` para detalhes completos.
 
 ## 🔐 Segurança
 
@@ -231,19 +247,19 @@ O banco de dados inclui 6 propriedades de exemplo representando o mercado brasil
 ## 🎯 Próximos Passos (Sugestões)
 
 1. **Integração com APIs brasileiras**
-   - VivaReal, ZAP Imóveis, OLX
+   - VivaReal, ZAP Imóveis, OLX (scraping)
    - API de CEP (ViaCEP)
-   - Google Maps para localização
+   - Geocoding para coordenadas (Google Maps, OpenCage)
 
 2. **Funcionalidades Avançadas**
-   - Upload de imagens
    - Sistema de favoritos
    - Notificações por email
    - Relatórios de vendas
    - CRM completo
+   - Agendamento de visitas
 
 3. **Melhorias na IA**
-   - Análise de sentimento
+   - Busca semântica com embeddings
    - Recomendações personalizadas
    - Chatbot multi-idioma
    - Integração com WhatsApp

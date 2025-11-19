@@ -121,8 +121,8 @@ app/api/properties/enrich/
 5. **Save** to database
 6. **Report** stats and estimated cost
 
-**Cost**: ~$0.0001 per property (~$0.06 for 582 properties)
-**Time**: ~15 minutes for 582 properties (with rate limiting)
+**Cost**: ~$0.0001 per property with GPT-4o-mini
+**Time**: ~10-15 minutes for 100 properties (with rate limiting)
 
 ### Automatic Enrichment (lib/enrichment/auto-enrich.ts)
 
@@ -244,7 +244,7 @@ The batch script includes built-in delays (default: 1000ms between batches) to a
 
 - Average: ~500 tokens per property
 - Cost: ~$0.0001 per property (GPT-4o-mini)
-- 582 properties ≈ 290,000 tokens ≈ $0.06 total
+- Very affordable for large-scale enrichment
 
 ### Data Validation
 
@@ -270,25 +270,22 @@ Increase the delay: `pnpm enrich -- --delay=2000`
 
 ## 📈 Expected Results
 
-After running enrichment on 582 properties:
+After running enrichment, you should see:
 
-**Before:**
-- AI Summary: 7.7%
-- Property Type: 73.9%
-- Neighborhood: 0.3%
-- Quality Score: 42/100
-
-**After:**
-- AI Summary: 100%
-- Property Type: 100%
-- Neighborhood: 85%+
-- Quality Score: 90+/100
+**Improvements:**
+- AI Summary: → 100%
+- Property Type: → 100%
+- Neighborhood: → 90%+
+- Features: → 90%+
+- Quality Score: → 90+/100
 
 This will dramatically improve:
 - ✅ Search accuracy
-- ✅ Agent productivity
 - ✅ Property matching quality
+- ✅ Data consistency
 - ✅ User experience
+
+**Note:** Images are not part of the enrichment process. The system focuses on structured data extraction and AI-generated summaries.
 
 ## 🎯 Next Steps
 

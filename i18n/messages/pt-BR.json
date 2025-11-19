@@ -38,16 +38,26 @@
     "chat": "Chat",
     "properties": "Imóveis",
     "leads": "Leads",
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "dashboard": "Dashboard",
+    "clients": "Clientes"
   },
   "chat": {
     "title": "Assistente Imobiliário",
-    "placeholder": "Pergunte sobre imóveis, busque propriedades, ou qualifique leads...",
+    "subtitle": "Seu assistente inteligente para buscar imóveis, qualificar leads e analisar o mercado",
+    "placeholder": "Digite sua mensagem...",
+    "placeholderHint": "Pressione Enter para enviar, Shift+Enter para nova linha",
     "newConversation": "Nova Conversa",
     "conversations": "Conversas",
+    "noConversations": "Nenhuma conversa ainda",
     "typing": "Digitando...",
     "send": "Enviar",
-    "welcomeMessage": "Olá! Sou seu assistente imobiliário inteligente. Posso ajudá-lo a:\n\n• Buscar imóveis específicos\n• Qualificar leads e agendar visitas\n• Fornecer insights do mercado imobiliário\n• Responder perguntas sobre propriedades\n\nComo posso ajudá-lo hoje?"
+    "helperText": "Clique em uma sugestão ou digite sua pergunta",
+    "welcomeMessage": "Olá! Sou seu assistente imobiliário inteligente. Posso ajudá-lo a:\n\n• Buscar imóveis específicos\n• Qualificar leads e agendar visitas\n• Fornecer insights do mercado imobiliário\n• Responder perguntas sobre propriedades\n\nComo posso ajudá-lo hoje?",
+    "characterCount": "caracteres",
+    "stopGenerating": "Parar geração",
+    "regenerate": "Regenerar resposta",
+    "editMessage": "Editar mensagem"
   },
   "properties": {
     "title": "Imóveis",
@@ -111,6 +121,45 @@
       "contacted": "Contatado",
       "converted": "Convertido",
       "lost": "Perdido"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Visão geral das suas atividades e métricas",
+    "stats": {
+      "properties": "Imóveis Ativos",
+      "propertiesThisWeek": "novos esta semana",
+      "clients": "Clientes",
+      "clientsThisMonth": "novos este mês",
+      "viewings": "Visitas Agendadas",
+      "upcomingViewings": "próximos 7 dias",
+      "avgPrice": "Ticket Médio",
+      "loading": "Carregando estatísticas..."
+    },
+    "recentActivity": {
+      "title": "Atividade Recente",
+      "empty": "Nenhuma atividade recente",
+      "newClient": "Novo cliente cadastrado",
+      "scheduledViewing": "Visita agendada"
+    },
+    "propertyDistribution": {
+      "title": "Distribuição de Imóveis por Tipo",
+      "empty": "Nenhum imóvel cadastrado"
+    },
+    "topMatches": {
+      "title": "Top Matches Cliente × Imóvel",
+      "match": "Match",
+      "viewAll": "Ver todos os matches",
+      "empty": "Nenhum match encontrado"
+    },
+    "quickActions": {
+      "title": "Ações Rápidas",
+      "searchProperties": "Buscar Imóveis",
+      "newClient": "Novo Cliente",
+      "scheduleViewing": "Agendar Visita",
+      "marketInsights": "Insights de Mercado",
+      "chatAI": "Chat IA",
+      "generateReport": "Gerar Relatório"
     }
   },
   "errors": {

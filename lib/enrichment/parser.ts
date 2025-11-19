@@ -143,10 +143,15 @@ function validateEnrichmentOutput(
     data.property_type = null
   }
 
-  // Validate listing_type enum
-  if (data.listing_type && !['rent', 'sale'].includes(data.listing_type)) {
+  // Validate listing_type enum (accept 'buy' as legacy value)
+  if (data.listing_type && !['rent', 'sale', 'buy'].includes(data.listing_type)) {
     console.warn(`Invalid listing_type: ${data.listing_type}, setting to null`)
     data.listing_type = null
+  }
+
+  // Normalize 'buy' to 'sale' for consistency
+  if ((data.listing_type as string) === 'buy') {
+    data.listing_type = 'sale'
   }
 
   // Validate furnished enum

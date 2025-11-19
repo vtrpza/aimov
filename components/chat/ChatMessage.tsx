@@ -8,6 +8,11 @@ import { Badge } from '@/components/ui/badge'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import rehypeHighlight from 'rehype-highlight'
 
 interface MessagePart {
   type: string
@@ -141,10 +146,66 @@ export function ChatMessage({ role, parts }: ChatMessageProps) {
         {/* Display text content */}
         {textContent && (
           <div className="relative">
-            <div className="prose prose-sm dark:prose-invert max-w-none">
-              <p className="text-foreground whitespace-pre-wrap leading-relaxed m-0">
+            <div className="prose prose-sm dark:prose-invert max-w-none prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-code:text-sm prose-p:leading-7 prose-headings:font-semibold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:font-semibold prose-ul:my-2 prose-ol:my-2 prose-li:my-1">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex, rehypeHighlight]}
+                components={{
+                  code: ({ node, inline, className, children, ...props }: any) => {
+                    return !inline ? (
+                      <div className="relative group/code">
+                        <div className="absolute right-2 top-2 opacity-0 group-hover/code:opacity-100 transition-opacity">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7 bg-background/80 hover:bg-background"
+                            onClick={async () => {
+                              await navigator.clipboard.writeText(String(children))
+                              toast.success('Código copiado!')
+                            }}
+                          >
+                            <Copy className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      </div>
+                    ) : (
+                      <code className={cn('px-1.5 py-0.5 rounded-md bg-muted text-foreground font-mono text-sm', className)} {...props}>
+                        {children}
+                      </code>
+                    )
+                  },
+                  pre: ({ children, ...props }: any) => (
+                    <pre {...props} className="overflow-x-auto rounded-lg">
+                      {children}
+                    </pre>
+                  ),
+                  p: ({ children, ...props }: any) => (
+                    <p {...props} className="mb-4 last:mb-0">
+                      {children}
+                    </p>
+                  ),
+                  ul: ({ children, ...props }: any) => (
+                    <ul {...props} className="list-disc list-inside space-y-1 my-3">
+                      {children}
+                    </ul>
+                  ),
+                  ol: ({ children, ...props }: any) => (
+                    <ol {...props} className="list-decimal list-inside space-y-1 my-3">
+                      {children}
+                    </ol>
+                  ),
+                  li: ({ children, ...props }: any) => (
+                    <li {...props} className="leading-7">
+                      {children}
+                    </li>
+                  ),
+                }}
+              >
                 {textContent}
-              </p>
+              </ReactMarkdown>
             </div>
 
             {/* Copy button (appears on hover for assistant messages) */}
@@ -152,7 +213,7 @@ export function ChatMessage({ role, parts }: ChatMessageProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7"
+                className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 bg-background/80 hover:bg-background"
                 onClick={handleCopy}
                 aria-label="Copiar mensagem"
               >

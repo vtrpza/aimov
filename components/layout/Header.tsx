@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Building2, Menu, LogOut, User as UserIcon, MessageSquare, Home, Users } from 'lucide-react'
+import { Building2, Menu, LogOut, User as UserIcon, MessageSquare, Home, Users, LayoutDashboard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -43,6 +43,7 @@ export function Header() {
 
   const navigation = [
     { name: 'Início', href: '/', icon: Home },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { name: 'Imóveis', href: '/properties', icon: Building2 },
     { name: 'Clientes', href: '/clients', icon: Users },
     { name: 'Chat IA', href: '/chat', icon: MessageSquare },
@@ -113,6 +114,12 @@ export function Header() {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="cursor-pointer">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    <span>Dashboard</span>
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/chat" className="cursor-pointer">
                     <MessageSquare className="mr-2 h-4 w-4" />

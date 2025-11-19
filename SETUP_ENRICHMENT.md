@@ -42,9 +42,9 @@ pnpm enrich
 ```
 
 This will:
-- Process all 582 properties
-- Take ~15 minutes  
-- Cost ~$0.06
+- Process all properties needing enrichment
+- Take ~10-15 minutes depending on volume
+- Cost very little (~$0.0001 per property with GPT-4o-mini)
 - Automatically save results
 
 ### Step 4: Verify Results
@@ -99,28 +99,30 @@ OPENAI_API_KEY=sk-proj-...
 ### Before Enrichment
 ```
 📊 DATA QUALITY VALIDATION REPORT
-Total Active Properties: 582
+Total Active Properties: 104
 
 FIELD COMPLETENESS:
-  AI Summary:          0 / 582 (0.0%)
-  Property Type:       430 / 582 (73.9%)  
-  Neighborhood:        2 / 582 (0.3%)
+  AI Summary:          19 / 104 (18.3%)
+  Property Type:       101 / 104 (97.1%)  
+  Neighborhood:        99 / 104 (95.2%)
+  Features:            83 / 104 (79.8%)
   
-OVERALL QUALITY SCORE: 42/100
-❌ Poor data quality
+OVERALL QUALITY SCORE: 55/100
+⚠️ Moderate data quality
 ```
 
 ### After Enrichment
 ```
 📊 DATA QUALITY VALIDATION REPORT
-Total Active Properties: 582
+Total Active Properties: 104
 
 FIELD COMPLETENESS:
-  AI Summary:          582 / 582 (100%)
-  Property Type:       582 / 582 (100%)
-  Neighborhood:        490+ / 582 (85%+)
+  AI Summary:          104 / 104 (100%)
+  Property Type:       104 / 104 (100%)
+  Neighborhood:        100+ / 104 (96%+)
+  Features:            100+ / 104 (96%+)
   
-OVERALL QUALITY SCORE: 92/100
+OVERALL QUALITY SCORE: 90+/100
 ✅ Excellent data quality!
 ```
 
@@ -138,7 +140,7 @@ OVERALL QUALITY SCORE: 92/100
 **Fix:** Add delay: `pnpm enrich -- --delay=2000`
 
 ### Script hangs or is slow
-**Normal!** Processing 582 properties takes ~15 minutes with rate limiting.
+**Normal!** Processing takes time with rate limiting to avoid API limits.
 
 ---
 
@@ -147,9 +149,10 @@ OVERALL QUALITY SCORE: 92/100
 After enrichment completes:
 
 1. **Verify quality**: `pnpm validate`
-2. **Test searches**: Try the agent flow: "Cliente precisa apartamento 3 quartos em Jundiaí, Vila Rami, até R$ 3k"
+2. **Test searches**: Try searching for properties with specific criteria
 3. **Integrate auto-enrichment**: Add to your scraper (see `ENRICHMENT_GUIDE.md`)
 4. **Build matching engine**: Now that data is clean, build intelligent property matching
+5. **Consider geocoding**: Add coordinates for map views (optional)
 
 ---
 
